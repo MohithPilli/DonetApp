@@ -28,5 +28,6 @@ jobs:
 
     - name: show settings.json
       run: cat settings.json
+      shell: bash
       
       

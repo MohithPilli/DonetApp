@@ -15,7 +15,7 @@ jobs:
 
     - name: transform settings.json
       run: |
-        jq -n --argfile base settings.json --argfile env dev.settings.json '$base * $env' > settings.json
+        jq -n --argfile base settings.json --argfile env dev.settings.json 'reduce ($base | to_entries + $env | to_entries)[] as $item ({}; .[$item.key] = $item.value)' > settings.json
       shell: bash
 
     - name: show settings.json

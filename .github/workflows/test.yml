@@ -9,6 +9,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
+    - name: checkout repository
+      uses: actions/checkout@v3
+
     - name: transform settings.json
       run: |
         jq -n --argfile base settings.json --argfile env dev.settings.json '$base * $env' > settings.json

@@ -15,9 +15,10 @@ jobs:
 
     - name: transform settings.json
       run: |
-        jq -n --argfile base settings.json --argfile env dev.settings.json 'reduce ($base | to_entries + $env | to_entries)[] as $item ({}; .[$item.key] = $item.value)' > settings.json
+        jq -n \ --argfile dev dev.settings.json \ --argfile settings settings.json \ '($settings | to_entries | map(.value = ($dev[.key] // .value)) | from_entries)' > settings.json 
       shell: bash
 
     - name: show settings.json
       run: cat settings.json
+      
       

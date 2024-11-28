@@ -1,8 +1,0 @@
-name: dotnet using calling
-on:
-  workflow_dispatch:
-
-    
-jobs:
-  Deploy-Donet:
-    uses: MohithPilli/reusable-demo-workflows/.github/workflows/reusable-dotnet.yml@master

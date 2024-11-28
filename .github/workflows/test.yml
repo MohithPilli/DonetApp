@@ -1,0 +1,19 @@
+name:  workflow
+on: 
+ push: 
+  branches: ["master"]
+
+jobs:
+  
+  Build:  
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: transform settings.json
+      run: |
+        jq -n --argfile base settings.json --argfile env dev.settings.json '$base * $env' > settings.json
+      shell: bash
+
+    - name: show settings.json
+      run: cat settings.json
+      

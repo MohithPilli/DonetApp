@@ -1,11 +1,11 @@
 {
-    "APIMBaseAddress": 
-    // "CIDAPIBaseAddress": "EnteredDuringDeployment",
-    // "Okta": {
-    //   "Authority": "EnteredDuringDeployment",
-    //   "ClientId": "EnteredDuringDeployment"
-    // },
-    // "CIDUrl": "EnteredDuringDeployment",
-    // "ProvidersSubscriptionKey": "EnteredDuringDeployment",
-    // "GoogleMapsAPIKey": "EnteredDuringDeployment"
-  }
+  "APIMBaseAddress": "x",
+  "CIDAPIBaseAddress": "y",
+  "Okta": {
+    "Authority": "z",
+    "ClientId": "y"
+  },
+  "CIDUrl": "a",
+  "ProvidersSubscriptionKey": "b",
+  "GoogleMapsAPIKey": "c"
+}

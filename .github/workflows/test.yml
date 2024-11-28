@@ -13,6 +13,14 @@ jobs:
     - name: checkout repository
       uses: actions/checkout@v3
 
+    - name: show settings.json
+      run: cat settings.json
+      shell: bash
+
+    - name: show dev.settings.json
+      run: cat dev.settings.json
+      shell: bash
+
     - name: transform settings.json
       run: |
         jq -n  --argfile dev dev.settings.json  --argfile settings settings.json  '($settings | to_entries | map(.value = ($dev[.key] // .value)) | from_entries)' > settings.json 

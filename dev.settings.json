@@ -1,11 +1,5 @@
 {
-    "APIMBaseAddress": "EnteredDuringDeployment",
-    "CIDAPIBaseAddress": "EnteredDuringDeployment",
-    "Okta": {
-      "Authority": "EnteredDuringDeployment",
-      "ClientId": "EnteredDuringDeployment"
-    },
-    "CIDUrl": "EnteredDuringDeployment",
-    "ProvidersSubscriptionKey": "EnteredDuringDeployment",
-    "GoogleMapsAPIKey": "EnteredDuringDeployment"
-  }
+"api_url" : "https://www.google.com",
+"log_level": "info",
+"feature_flag": false
+}

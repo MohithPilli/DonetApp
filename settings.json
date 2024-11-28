@@ -1,11 +1,5 @@
 {
-  "APIMBaseAddress": "x",
-  "CIDAPIBaseAddress": "y",
-  "Okta": {
-    "Authority": "z",
-    "ClientId": "y"
-  },
-  "CIDUrl": "a",
-  "ProvidersSubscriptionKey": "b",
-  "GoogleMapsAPIKey": "c"
-}
+  "api_url" : "https://www.yahoo.com",
+  "log_level": "debug",
+  "feature_flag": true
+  }

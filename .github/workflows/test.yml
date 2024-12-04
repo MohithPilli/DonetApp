@@ -30,6 +30,7 @@ jobs:
          for KEY in $KEYS; do
            echo "Processing key: $KEY"
            SECRET_VALUE=$(printenv "$KEY")
+           echo "$SECRET_VALUE"
            if [[ -n "$SECRET_VALUE" ]]; then
              echo "Updating key $KEY with value from environment secret."
              jq --arg key "$KEY" --arg value "$SECRET_VALUE" \

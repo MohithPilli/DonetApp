@@ -1,11 +1,4 @@
 {
-  "APIMBaseAddress": "",
-  "CIDAPIBaseAddress": "",
-  "Okta": {
-    "Authority": "",
-    "ClientId": ""
-  },
-  "CIDUrl": "",
-  "ProvidersSubscriptionKey": "",
-  "GoogleMapsAPIKey": ""
+  "key1": "",
+  "key2": ""
 }

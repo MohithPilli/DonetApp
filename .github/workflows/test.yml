@@ -32,4 +32,5 @@ jobs:
          done
          # Print the updated JSON file for verification
          cat $settings.json
+      shell: bash
       

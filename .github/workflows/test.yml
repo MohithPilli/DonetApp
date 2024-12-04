@@ -26,8 +26,7 @@ jobs:
          for KEY in $KEYS; do
            SECRET_VALUE=$(printenv "$KEY")
            if [[ -n "$SECRET_VALUE" ]]; then
-             jq --arg key "$KEY" --arg value "$SECRET_VALUE" \
-               '.[$key] = $value' settings.json > temp.json && mv temp.json settings.json
+             jq --arg key "$KEY" --arg value "$SECRET_VALUE" '.[$key] = $value' settings.json > temp.json && mv temp.json settings.json
            fi
          done
          # Print the updated JSON file for verification

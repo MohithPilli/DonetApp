@@ -17,17 +17,19 @@ jobs:
       run: cat settings.json
       shell: bash
 
-    - name: show dev.settings.json
-      run: cat dev.settings.json
-      shell: bash
-
-    - name: transform settings.json
+       # Step 3: Update JSON File with Secrets Dynamically
+    - name: Update JSON File with Secrets
       run: |
-        jq -n  --argfile env dev.settings.json  --argfile settings settings.json  '($settings | to_entries | map(.value = ($env[.key] // .value)) | from_entries)' > local.settings.json  
-      shell: bash
-
-    - name: show settings.json
-      run: cat local.settings.json 
-      shell: bash
-      
+         # Read all keys from the JSON file
+         KEYS=$(jq -r 'keys[]' $JSON_FILE)
+         # Iterate over the keys and update their values from GitHub secrets
+         for KEY in $KEYS; do
+           SECRET_VALUE="${{ secrets[KEY] }}"
+           if [[ -n "$SECRET_VALUE" ]]; then
+             jq --arg key "$KEY" --arg value "$SECRET_VALUE" \
+               '.[$key] = $value' $JSON_FILE > temp.json && mv temp.json $settings.json
+           fi
+         done
+         # Print the updated JSON file for verification
+         cat $settings.json
       

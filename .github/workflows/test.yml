@@ -21,7 +21,7 @@ jobs:
     - name: Update JSON File with Secrets
       run: |
          # Read all keys from the JSON file
-         KEYS=$(jq -r 'keys[]' $JSON_FILE)
+         KEYS=$(jq -r 'keys[]' $settings.json)
          # Iterate over the keys and update their values from GitHub secrets
          for KEY in $KEYS; do
            SECRET_VALUE="${{ secrets[KEY] }}"

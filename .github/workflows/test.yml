@@ -36,7 +36,6 @@ jobs:
          
          # Iterate over the keys and update their values from environment variables
          for KEY in $KEYS; do
-           $KEY: ${{ SECRETS.$KEY }}
            echo "Processing key: $KEY"
            SECRET_VALUE=$(jq -r --arg key "$KEY" '.[$key] // empty' secrets_temp.json)
            echo "$SECRET_VALUE"

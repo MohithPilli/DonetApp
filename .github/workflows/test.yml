@@ -20,14 +20,30 @@ jobs:
        # Step 3: Update JSON File with Secrets Dynamically
     - name: Update JSON File with Secrets
       env:
-       key1: ${{ secrets.color }}
-       key2: ${{ secrets.name }}
+       key1: ${{ secrets.KEY1 }}
+       key2: ${{ secrets.KEY2 }}
       run: |
+         # Define the JSON file path
          JSON_FILE="./settings.json"
+         # Read all keys from the JSON file
+         echo "Reading keys from JSON file..."
          KEYS=$(jq -r 'keys[]' $JSON_FILE)
+         echo "Keys found in JSON file: $KEYS"
+         # Iterate over the keys and update their values from environment variables
          for KEY in $KEYS; do
+           echo "Processing key: $KEY"
            SECRET_VALUE=$(printenv "$KEY")
-           jq --arg key "$KEY" --arg value "$SECRET_VALUE" '.[$key] = $value' $JSON_FILE > temp.json && mv temp.json settings.json
+           echo "$SECRET_VALUE"
+           if [[ -n "$SECRET_VALUE" ]]; then
+             echo "Updating key $KEY with value from environment secret."
+             jq --arg key "$KEY" --arg value "$SECRET_VALUE" \
+               '.[$key] = $value' $JSON_FILE > temp.json && mv temp.json $JSON_FILE
+           else
+             echo "No environment secret found for key: $KEY. Skipping update."
+           fi
          done
-         cat settings.json
-      shell: bash 
+         # Print the updated JSON file for verification
+         echo "Updated JSON file content:"
+         cat $JSON_FILE
+      shell: bash
+      

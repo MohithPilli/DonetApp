@@ -43,8 +43,6 @@ jobs:
              echo "Found matching GitHub secret for key: $KEY"
              jq --arg key "$KEY" --arg value "$SECRET_VALUE" \
                '.[$key] = $value' "$JSON_FILE" > temp.json && mv temp.json settings.json
-           else
-             echo "No matching GitHub secret found for key: $KEY. Skipping update."
            fi
          done
          # Print the updated JSON file for verification

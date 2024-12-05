@@ -50,4 +50,4 @@ jobs:
          # Print the updated JSON file for verification
          echo "Updated JSON file content:"
          cat $JSON_FILE
-      shell: bash     
+      shell: bash   

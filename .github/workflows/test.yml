@@ -40,9 +40,9 @@ jobs:
            echo "Processing key: $KEY"
            SECRET_VALUE=$(jq -r --arg key "$KEY" '.[$key] // empty' secrets_temp.json)
            jq --arg key "$KEY" --arg value "$SECRET_VALUE" \
-               '.[$key] = $value' $JSON_FILE > temp.json && mv temp.json $JSON_FILE
+               '.[$key] = $value' $JSON_FILE > temp.json && mv temp.json settings.json
          done
          # Print the updated JSON file for verification
          echo "Updated JSON file content:"
-         cat $JSON_FILE
+         cat settings.json
       shell: bash   

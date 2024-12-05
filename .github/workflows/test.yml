@@ -48,4 +48,4 @@ jobs:
          # Print the updated JSON file for verification
          echo "Updated JSON file content:"
          cat settings.json
-      shell: bash   
+      shell: bash  

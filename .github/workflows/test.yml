@@ -19,6 +19,9 @@ jobs:
 
        # Step 3: Update JSON File with Secrets Dynamically
     - name: Update JSON File with Secrets
+      env:
+       key1: ${{ secrets.KEY1 }}
+       key2: ${{ secrets.KEY2 }}
       run: |
          # Define the JSON file path
          JSON_FILE="./settings.json"
@@ -29,7 +32,7 @@ jobs:
          # Iterate over the keys and update their values from environment variables
          for KEY in $KEYS; do
            echo "Processing key: $KEY"
-           SECRET_VALUE=$(printenv "$KEY" || echo "")
+           SECRET_VALUE=$(printenv "$KEY")
            echo "$SECRET_VALUE"
            if [[ -n "$SECRET_VALUE" ]]; then
              echo "Updating key $KEY with value from environment secret."

@@ -19,9 +19,9 @@ jobs:
 
        # Step 3: Update JSON File with Secrets Dynamically
     - name: Update JSON File with Secrets
-      # env:
-      #  key1: ${{ secrets.KEY1 }}
-      #  key2: ${{ secrets.KEY2 }}
+      env:
+       key1: ${{ secrets.KEY1 }}
+       key2: ${{ secrets.KEY2 }}
       run: |
          JSON_FILE="./settings.json"
          KEYS=$(jq -r 'keys[]' $JSON_FILE)

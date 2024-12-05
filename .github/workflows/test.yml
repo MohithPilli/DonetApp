@@ -20,8 +20,8 @@ jobs:
        # Step 3: Update JSON File with Secrets Dynamically
     - name: Update JSON File with Secrets
       env:
-       key1: ${{ secrets.KEY1 }}
-       key2: ${{ secrets.KEY2 }}
+       key1: ${{ secrets.color }}
+       key2: ${{ secrets.name }}
       run: |
          # Define the JSON file path
          JSON_FILE="./settings.json"

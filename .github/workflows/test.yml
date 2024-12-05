@@ -21,7 +21,7 @@ jobs:
     - name: Update JSON File with Secrets
       env:
        key1: ${{ secrets.color }}
-       key2: ${{ secrets.name }}
+       key: ${{ secrets.name }}
       run: |
          JSON_FILE="./settings.json"
          KEYS=$(jq -r 'keys[]' $JSON_FILE)

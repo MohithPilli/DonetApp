@@ -11,6 +11,6 @@ jobs:
   JsonTranform:
     uses: MohithPilli/DonetApp/.github/workflows/test.yml@master
     with: 
-     target-file: ./settings.json
+     target-file: ''
     secrets: 
      secrets-json: ${{ toJson(secrets) }}

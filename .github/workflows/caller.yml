@@ -1,6 +1,11 @@
 name: caller workflow
 on: 
  workflow_dispatch:
+  inputs: 
+   target-file:
+        description: 'target file we overwrite with corresponding environment secrets'
+        required: false
+        type: string
  # push: 
  #   branches: ["master"]
    

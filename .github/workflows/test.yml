@@ -50,7 +50,7 @@ jobs:
            if [[ -n "$SECRET_VALUE" ]]; then
              echo "Found matching GitHub secret for key: $KEY"
              jq --arg key "$KEY" --arg value "$SECRET_VALUE" \
-               '.[$key] = $value' "$JSON_FILE" > temp.json && mv temp.json settings.json
+               '.[$key] = $value' "$JSON_FILE" > temp.json && mv temp.json ${{ inputs.target-file }}
            fi
          done
          # Print the updated JSON file for verification

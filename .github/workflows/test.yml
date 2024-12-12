@@ -39,7 +39,7 @@ jobs:
          echo "Keys found in JSON file: $KEYS"
          
          # Convert SECRETS_JSON into a readable format
-         echo 'secrets.secrets-json' | jq . > secrets_temp.json
+         echo "secrets.secrets-json" | jq . > secrets_temp.json
          echo "Available GitHub secrets:"
          cat secrets_temp.json
          

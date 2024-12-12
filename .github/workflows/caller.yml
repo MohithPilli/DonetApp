@@ -1,0 +1,16 @@
+name: caller workflow
+on: 
+ workflow_dispatch:
+ push: 
+   branches: ["master"]
+   
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  deploy-dotnet:
+    uses: MohithPilli/DonetApp/.github/workflows/test.yml@master
+    with: 
+     target-file: ./settings.json
+    secrets: 
+     secrets-json: ${{ toJson(secrets) }}

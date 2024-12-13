@@ -15,7 +15,7 @@ jobs:
       - name: Install jq
         run: sudo apt-get update && sudo apt-get install -y jq
 
-      - name: Debug: Check if settings.json exists
+      - name:  Check if settings.json exists
         run: |
           if [[ -f ./settings.json ]]; then
             echo "settings.json found."
@@ -26,7 +26,7 @@ jobs:
           fi
         shell: bash
 
-      - name: Debug: Validate settings.json
+      - name:  Validate settings.json
         run: |
           echo "Validating settings.json..."
           cat settings.json | jq .

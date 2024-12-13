@@ -41,7 +41,7 @@ jobs:
            echo "$SECRET_VALUE"
            if [[ -n "$SECRET_VALUE" ]]; then
              echo "Found matching GitHub secret for key: $KEY_PATH"
-             jq --arg path $KEY_PATH" --arg value "$SECRET_VALUE" '
+             jq --arg path "$KEY_PATH" --arg value "$SECRET_VALUE" '
               setpath($path | split(".") | map(select(length > 0)); $value)' \
                 "$JSON_FILE" > temp.json && mv temp.json settings.json
            fi

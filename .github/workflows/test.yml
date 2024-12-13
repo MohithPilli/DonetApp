@@ -49,5 +49,5 @@ jobs:
          done
          # Print the updated JSON file for verification
          echo "Updated JSON file content:"
-         cat settings.json
+         cat $JSON_FILE
       shell: bash  

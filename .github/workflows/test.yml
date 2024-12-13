@@ -42,6 +42,7 @@ jobs:
              jq --arg path "$KEY_PATH" --arg value "$SECRET_VALUE" '
               setpath($path | split(".") | map(select(length > 0)); $value)' \
                 "$JSON_FILE" > temp.json && mv temp.json "$JSON_FILE"
+            echo "$JSON_FILE"
            fi
          done
          # Print the updated JSON file for verification

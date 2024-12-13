@@ -1,5 +1,12 @@
 {
-  "level1": {
-    "level2": "placeholder_value"
-  }
+    "key1": "value1",
+    "key2": "value2",
+    "key1": "value3", 
+    "nested": {
+        "key1": "nestedValue1",
+        "key2": {
+            "key1": "deepNestedValue1"
+        },
+        "key3": "nestedValue2"
+    }
 }

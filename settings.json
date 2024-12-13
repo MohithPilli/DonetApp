@@ -1,7 +1,5 @@
 {
-    "Okta": {
-    "KEY1": "https://logintest.bannerhealth.com",
-    "KEY3": "0oasdfdsfasdf7"
-  },
-   "KEY2":"hello"
+  "level1": {
+    "level2": "placeholder_value"
   }
+}

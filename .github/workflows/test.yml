@@ -37,7 +37,7 @@ jobs:
            echo "Processing key: $KEY_PATH"
            SECRET_KEY=$(echo "$KEY_PATH" | tr '.' '_' | tr '[:lower:]' '[:upper:]')
            echo "$SECRET_KEY"
-           SECRET_VALUE=$(jq -r --arg path "$SECRET_KEY" 'getpath($path | split(".") | map(select(length > 0))) // empty' secrets_temp.json)
+           SECRET_VALUE=$(jq -r --arg path "$KEY_PATH" 'getpath($path | split(".") | map(select(length > 0))) // empty' secrets_temp.json)
            echo "$SECRET_VALUE"
            if [[ -n "$SECRET_VALUE" ]]; then
              echo "Found matching GitHub secret for key: $KEY_PATH"

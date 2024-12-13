@@ -31,9 +31,9 @@ jobs:
          echo "Keys found in JSON file: $KEYS"
          
          # Convert SECRETS_JSON into a readable format
-         echo "$SECRETS_JSON" | jq . > secrets_temp.json
-         echo "Available GitHub secrets:"
-         cat secrets_temp.json
+         # echo "$SECRETS_JSON" | jq . > secrets_temp.json
+         # echo "Available GitHub secrets:"
+         # cat secrets_temp.json
          
          # Iterate over the keys and update their values from environment variables
          for KEY_PATH in $KEYS; do

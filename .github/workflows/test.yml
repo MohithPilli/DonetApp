@@ -30,7 +30,7 @@ jobs:
          KEYS=$(jq -r 'paths | map(tostring) | join(".")' $JSON_FILE)
          echo "Keys found in JSON file: $KEYS"
          
-         Convert SECRETS_JSON into a readable format
+         # Convert SECRETS_JSON into a readable format
          echo "$SECRETS_JSON" | jq . > secrets_temp.json
          echo "Available GitHub secrets:"
          cat secrets_temp.json
@@ -41,7 +41,7 @@ jobs:
            SECRET_KEY=$(echo "$KEY_PATH" | tr '.' '_' | tr '[:lower:]' '[:upper:]')
            SECRET_VALUE=$(jq -r --arg path "$KEY_PATH" 'getpath($path | split(".") | map(select(length > 0))) // empty' secrets_temp.json)
            if [[ -n "$SECRET_VALUE" ]]; then
-             echo "Found matching GitHub secret for key: $KEY"
+             echo "Found matching GitHub secret for key: $KEY_PATH"
              jq --arg path "$KEY_PATH" --arg value "$SECRET_VALUE" '
               setpath($path | split(".") | map(select(length > 0)); $value)' \
                 "$JSON_FILE" > temp.json && mv temp.json "$JSON_FILE"

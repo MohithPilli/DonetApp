@@ -27,7 +27,7 @@ jobs:
          JSON_FILE="./settings.json"
          # Read all keys from the JSON file
          echo "Reading keys from JSON file..."
-         KEYS=$(jq -r 'keys[]' $JSON_FILE)
+         KEYS=$(jq -r 'paths | map(tostring) | join(".")' $JSON_FILE)
          echo "Keys found in JSON file: $KEYS"
          
          # Convert SECRETS_JSON into a readable format
@@ -36,13 +36,15 @@ jobs:
          cat secrets_temp.json
          
          # Iterate over the keys and update their values from environment variables
-         for KEY in $KEYS; do
-           echo "Processing key: $KEY"
-           SECRET_VALUE=$(jq -r --arg key "$KEY" '.[$key] // empty' secrets_temp.json)
+         for KEY_PATH in $KEYS; do
+           echo "Processing key: $KEY_PATH"
+           SECRET_KEY=$(echo "$KEY_PATH" | tr '.' '_' | tr '[:lower:]' '[:upper:]')
+           SECRET_VALUE=$(printenv "$SECRET_KEY")
            if [[ -n "$SECRET_VALUE" ]]; then
              echo "Found matching GitHub secret for key: $KEY"
-             jq --arg key "$KEY" --arg value "$SECRET_VALUE" \
-               '.[$key] = $value' "$JSON_FILE" > temp.json && mv temp.json settings.json
+             jq --arg path "$KEY_PATH" --arg value "$SECRET_VALUE" '
+              setpath($path | split(".") | map(select(length > 0)); $value)' \
+                "$JSON_FILE" > temp.json && mv temp.json "$JSON_FILE"
            fi
          done
          # Print the updated JSON file for verification

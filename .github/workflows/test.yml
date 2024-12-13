@@ -1,17 +1,7 @@
 name:  workflow
 on: 
- workflow_call:
-  secrets: 
-    secrets-json:
-     description: 'JSON-formatted secrets'
-     required: false
-     
-  inputs: 
-   target-file:
-        description: 'target file we overwrite with corresponding environment secrets'
-        required: false
-        type: string
-  
+ push: 
+  branches: ["master"]
 
 jobs:
   
@@ -25,21 +15,23 @@ jobs:
       uses: actions/checkout@v3
 
     - name: show settings.json
-      run: cat ${{ inputs.target-file }}
+      run: cat settings.json
       shell: bash
 
        # Step 3: Update JSON File with Secrets Dynamically
     - name: Update JSON File with Secrets
+      env:
+       SECRETS_JSON: ${{ toJson(secrets) }}
       run: |
          # Define the JSON file path
-         JSON_FILE="${{ inputs.target-file }}"
+         JSON_FILE="./settings.json"
          # Read all keys from the JSON file
          echo "Reading keys from JSON file..."
          KEYS=$(jq -r 'keys[]' $JSON_FILE)
          echo "Keys found in JSON file: $KEYS"
          
          # Convert SECRETS_JSON into a readable format
-         echo '${{ secrets.secrets-json }}' | jq . > secrets_temp.json
+         echo "$SECRETS_JSON" | jq . > secrets_temp.json
          echo "Available GitHub secrets:"
          cat secrets_temp.json
          
@@ -50,10 +42,10 @@ jobs:
            if [[ -n "$SECRET_VALUE" ]]; then
              echo "Found matching GitHub secret for key: $KEY"
              jq --arg key "$KEY" --arg value "$SECRET_VALUE" \
-               '.[$key] = $value' "$JSON_FILE" > temp.json && mv temp.json ${{ inputs.target-file }}
+               '.[$key] = $value' "$JSON_FILE" > temp.json && mv temp.json settings.json
            fi
          done
          # Print the updated JSON file for verification
          echo "Updated JSON file content:"
-         cat ${{ inputs.target-file }}
+         cat settings.json
       shell: bash  

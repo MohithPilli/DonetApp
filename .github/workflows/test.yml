@@ -43,12 +43,11 @@ jobs:
              echo "Found matching GitHub secret for key: $KEY_PATH"
              jq --arg path "$KEY_PATH" --arg value "$SECRET_VALUE" '
               setpath($path | split(".") | map(select(length > 0)); $value)' \
-                "$JSON_FILE" > temp.json && mv temp.json "$JSON_FILE"
-            echo "$JSON_FILE"
+                "$JSON_FILE" > temp.json && mv temp.json settings.json
            fi
          done
          # Print the updated JSON file for verification
          echo "Updated JSON file content:"
-         cat $JSON_FILE
+         cat settings.json
       shell: bash  
 
